@@ -8,9 +8,13 @@ function convertPokeApi(pokeDetails) {
     pokemon.types = types
     pokemon.type = type
     pokemon.photo = pokeDetails.sprites.other["official-artwork"].front_default
+    pokemon.height = pokeDetails.height
+    pokemon.weight = pokeDetails.weight
+    // pokemon.ability = pokeDetails.abilities.ability
     return pokemon
     
 }
+
 pokeApi.getPokemonDeltail = (pokemons) =>{
     return fetch(pokemons.url)
             .then((resposta) => resposta.json())
@@ -25,6 +29,6 @@ pokeApi.getPokemon = (offset, limit ) =>{
     .then((resposeBody) =>resposeBody.results)
     .then((pokemons) => pokemons.map((pokemon) => pokeApi.getPokemonDeltail(pokemon)))
     .then((detailRest)=> Promise.all(detailRest))
-    .then((pokemonsDetails) =>pokemonsDetails)
+    .then((pokemonsDetails) => pokemonsDetails)
 }
 
